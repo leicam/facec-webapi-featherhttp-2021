@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\juliano.maciel\\source\\repos\\Facec.WebApi\\Facec.WebApi\\Facec.WebApi.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\juliano.maciel\\source\\repos\\Facec.WebApi\\Facec.WebApi\\Facec.WebApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\juliano.maciel\\source\\repos\\Facec.WebApi\\Facec.WebApi\\Facec.WebApi.csproj",
+        "projectName": "Facec.WebApi",
+        "projectPath": "C:\\Users\\juliano.maciel\\source\\repos\\Facec.WebApi\\Facec.WebApi\\Facec.WebApi.csproj",
+        "packagesPath": "C:\\Users\\juliano.maciel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\juliano.maciel\\source\\repos\\Facec.WebApi\\Facec.WebApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\juliano.maciel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\juliano.maciel\\.nuget\\packages\\acbr.net.core": {},
+          "C:\\Users\\juliano.maciel\\.nuget\\packages\\acbr.net.dfe.core": {},
+          "C:\\Users\\juliano.maciel\\.nuget\\packages\\acbr.net.integrador": {},
+          "C:\\Users\\juliano.maciel\\.nuget\\packages\\acbr.net.sat": {},
+          "C:\\Users\\juliano.maciel\\.nuget\\packages\\featherhttp\\0.1.58-alpha.g44fef05de5\\lib\\netcoreapp3.1": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "FeatherHttp": {
+              "target": "Package",
+              "version": "[0.1.58-alpha.g44fef05de5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
