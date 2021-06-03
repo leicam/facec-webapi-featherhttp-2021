@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -19,10 +20,14 @@ namespace Facec.WebApi
             var app = WebApplication.Create(args);
 
             app.MapPost("/api/v1/aluno", AdicionarAluno);
+            app.MapPost("/api/v1/aluno/{registroAcademico}", AlterarAluno);
+            app.MapGet("/api/v1/aluno", BuscarTodos);
+            app.MapGet("/api/v1/aluno/{registroAcademico}", BuscarAluno);
 
             await app.RunAsync();
         }
 
+        #region AdicionarAluno
         private static async Task AdicionarAluno(HttpContext httpContext)
         {
             try
@@ -30,7 +35,7 @@ namespace Facec.WebApi
                 using (var dataBaseContext = new DataBaseContext())
                 {
                     var aluno = await httpContext.Request.ReadJsonAsync<Aluno>();
-                    await dataBaseContext.AddAsync(aluno);
+                    await dataBaseContext.Alunos.AddAsync(aluno);
                     await dataBaseContext.SaveChangesAsync();
 
                     httpContext.Response.StatusCode = 200;
@@ -41,5 +46,86 @@ namespace Facec.WebApi
                 throw ex;
             }
         }
+        #endregion AdicionarAluno
+
+        #region AlterarAluno
+        private static async Task AlterarAluno(HttpContext httpContext)
+        {
+            if(!httpContext.Request.RouteValues.TryGet("registroAcademico", out string registroAcademico))
+            {
+                httpContext.Response.StatusCode = 400;
+                return;
+            }
+
+            try
+            {
+                using (var dataBaseContext = new DataBaseContext())
+                {
+                    var aluno = await dataBaseContext.Alunos.FindAsync(registroAcademico);
+
+                    if (aluno == null)
+                    {
+                        httpContext.Response.StatusCode = 400;
+                        return;
+                    }
+
+                    var alunoRequest = await httpContext.Request.ReadJsonAsync<Aluno>();
+
+                    aluno.Nome = alunoRequest.Nome;
+
+                    await dataBaseContext.SaveChangesAsync();
+
+                    httpContext.Response.StatusCode = 204;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion AlterarAluno
+
+        #region BuscarTodos
+        private static async Task BuscarTodos(HttpContext httpContext)
+        {
+            try
+            {
+                using (var dataBaseContext = new DataBaseContext())
+                {
+                    await httpContext.Response.WriteJsonAsync(await dataBaseContext.Alunos.ToListAsync());
+                    httpContext.Response.StatusCode = 200;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion BuscarTodos
+
+        #region BuscarAluno
+        private static async Task BuscarAluno(HttpContext httpContext)
+        {
+            if(!httpContext.Request.RouteValues.TryGet("registroAcademico", out string registroAcademico))
+            {
+                httpContext.Response.StatusCode = 400;
+                return;
+            }
+
+            try
+            {
+                using (var dataBaseContext = new DataBaseContext())
+                {
+                    await httpContext.Response
+                        .WriteJsonAsync(await dataBaseContext.Alunos.FindAsync(registroAcademico) ?? new Aluno());
+                    httpContext.Response.StatusCode = 200;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion BuscarAluno
     }
 }

@@ -23,7 +23,6 @@ C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\bin\Debug\netcore
 C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
-C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\obj\Debug\netcoreapp3.1\Facec.WebApi.csprojAssemblyReference.cache
 C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\obj\Debug\netcoreapp3.1\Facec.WebApi.AssemblyInfoInputs.cache
 C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\obj\Debug\netcoreapp3.1\Facec.WebApi.AssemblyInfo.cs
 C:\Users\juliano.maciel\source\repos\Facec.WebApi\Facec.WebApi\obj\Debug\netcoreapp3.1\Facec.WebApi.csproj.CoreCompileInputs.cache
