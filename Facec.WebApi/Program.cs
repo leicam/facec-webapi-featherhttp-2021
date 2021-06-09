@@ -23,6 +23,8 @@ namespace Facec.WebApi
             app.MapPost("/api/v1/aluno/{registroAcademico}", AlterarAluno);
             app.MapGet("/api/v1/aluno", BuscarTodos);
             app.MapGet("/api/v1/aluno/{registroAcademico}", BuscarAluno);
+            app.MapDelete("/api/v1/aluno", DeletarTodos);
+            app.MapDelete("/api/v1/aluno/{registroAcademico}", DeletarAluno);
 
             await app.RunAsync();
         }
@@ -127,5 +129,58 @@ namespace Facec.WebApi
             }
         }
         #endregion BuscarAluno
+
+        #region DeletarTodos
+        public static async Task DeletarTodos(HttpContext httpContext)
+        {
+            try
+            {
+                using (var dataBaseContext = new DataBaseContext())
+                {
+                    dataBaseContext.Alunos.RemoveRange(dataBaseContext.Alunos);
+                    await dataBaseContext.SaveChangesAsync();
+
+                    httpContext.Response.StatusCode = 200;
+                }
+            }
+            catch (Exception ex)
+            {
+                httpContext.Response.StatusCode = 400;
+                await httpContext.Response.WriteAsync(ex.Message);
+            }
+        }
+        #endregion DeletarTodos
+
+        #region DeletarAluno
+        private static async Task DeletarAluno(HttpContext httpContext)
+        {
+            try
+            {
+                if (!httpContext.Request.RouteValues.TryGet("registroAcademico", out string registroAcademico))
+                    throw new ArgumentException(nameof(registroAcademico));
+
+                using (var dataBaseContext = new DataBaseContext())
+                {
+                    var aluno = await dataBaseContext.Alunos.FindAsync(registroAcademico)
+                        ?? throw new NullReferenceException(nameof(Aluno));
+
+                    dataBaseContext.Alunos.Remove(aluno);
+                    await dataBaseContext.SaveChangesAsync();
+
+                    httpContext.Response.StatusCode = 200;
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                httpContext.Response.StatusCode = 400;
+                await httpContext.Response.WriteAsync(ex.Message);
+            }
+            catch (NullReferenceException ex)
+            {
+                httpContext.Response.StatusCode = 404;
+                await httpContext.Response.WriteAsync(ex.Message);
+            }
+        }
+        #endregion DeletarAluno
     }
 }
